@@ -158,9 +158,6 @@ svg { fill: none; }
   display: block; width: 100%; background: transparent; color: var(--gold); border: 1px solid var(--gold-dim); border-radius: 2px; padding: 12px; font-size: 17px; margin-top: 10px; min-height: 50px; transition: background .15s ease;
 }
 .secondary-btn:active { background: var(--gold-faint); }
-.edit-link-wrap { text-align: center; margin-top: 36px; }
-.edit-link { background: none; border: none; color: var(--muted); font-size: 15px; padding: 12px 16px; min-height: 44px; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--gold-dim); }
-.edit-link:active { color: var(--gold); }
 
 /* ---------- קריאה ---------- */
 .reading { font-family: var(--font-text); }

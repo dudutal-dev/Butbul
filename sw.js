@@ -1,5 +1,5 @@
 // Service worker – מאפשר עבודה ללא קליטה (בבית העלמין)
-const CACHE = 'azkara-v8';
+const CACHE = 'azkara-v9';
 const ASSETS = [
   './',
   './index.html',
