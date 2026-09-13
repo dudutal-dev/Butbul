@@ -4,6 +4,8 @@
 
   const STORAGE_KEY = 'azkara.settings.v1';
   const IMG_PREFIX = 'azkara.img.';
+  // תמונות ברירת מחדל המוטמעות באפליקציה (תמונה שמועלית בהגדרות מחליפה אותן)
+  const DEFAULT_IMAGES = { cover: 'images/cover.jpg', father: 'images/father.jpg', mother: 'images/mother.jpg' };
 
   const DEFAULTS = {
     familyTitle: 'לְעִלּוּי נִשְׁמַת הוֹרֵינוּ הַיְּקָרִים',
@@ -93,6 +95,7 @@
 
   // רצף הקריאה: שם פרטי, בן/בת, שם האם, נשמה
   function letterGroups(p) {
+    if (!lettersOf(p.name).length) return [];
     return [
       { label: p.name, letters: lettersOf(p.name) },
       { label: p.gender, letters: lettersOf(p.gender) },
@@ -105,7 +108,7 @@
     return `<div class="placeholder"><svg><use href="#${icon}"/></svg><span>${esc(text || '')}</span></div>`;
   }
   function imgOrPlaceholder(key, icon, text) {
-    const src = getImage(key);
+    const src = getImage(key) || DEFAULT_IMAGES[key];
     return src ? `<img src="${src}" alt="">` : placeholder(icon, text);
   }
 
@@ -424,7 +427,7 @@
     const pick = e.target.closest('[data-pick]');
     if (pick) { pickImage(pick.dataset.pick); return; }
     const clr = e.target.closest('[data-clear]');
-    if (clr) { if (getImage(clr.dataset.clear) && confirm('להסיר את התמונה?')) { setImage(clr.dataset.clear, null); refreshThumbs(); } return; }
+    if (clr) { if (getImage(clr.dataset.clear) && confirm('להסיר את התמונה שהועלתה ולחזור לתמונה המקורית?')) { setImage(clr.dataset.clear, null); refreshThumbs(); } return; }
   });
   ['father', 'mother'].forEach((k) => {
     ['name', 'gender', 'mother'].forEach((f) => $(`#s-${k}-${f}`).addEventListener('input', () => updatePreview(k)));

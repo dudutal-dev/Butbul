@@ -39,4 +39,5 @@ python3 -m http.server 8000
 - `js/app.js` – ניווט, הגדרות, תמונות וסדר הקריאה.
 - `js/tehillim-data.js` – טקסט תהילים (מקור: Sefaria, "Miqra according to the Masorah", ללא טעמים).
 - `js/kaddish.js` – נוסח הקדיש, שמות האותיות ורשימת הפרקים המקובלים.
+- `images/` – תמונות ברירת המחדל (שער, אבא, אמא). תמונה שמועלית בהגדרות מחליפה אותן במכשיר.
 - `sw.js`, `manifest.webmanifest`, `icons/` – תמיכה ב-PWA ועבודה ללא רשת.

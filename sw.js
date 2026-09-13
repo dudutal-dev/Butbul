@@ -1,5 +1,5 @@
 // Service worker – מאפשר עבודה ללא קליטה (בבית העלמין)
-const CACHE = 'azkara-v1';
+const CACHE = 'azkara-v2';
 const ASSETS = [
   './',
   './index.html',
@@ -10,7 +10,10 @@ const ASSETS = [
   './manifest.webmanifest',
   './icons/icon-192.png',
   './icons/icon-512.png',
-  './icons/icon-maskable-512.png'
+  './icons/icon-maskable-512.png',
+  './images/cover.jpg',
+  './images/father.jpg',
+  './images/mother.jpg'
 ];
 
 self.addEventListener('install', (e) => {
