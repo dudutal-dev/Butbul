@@ -131,8 +131,11 @@
   }
   window.addEventListener('hashchange', () => render(location.hash.slice(1) || 'home'));
 
-  function showScreen(id) {
+  function showScreen(id, tab) {
     $$('.screen').forEach((s) => s.classList.toggle('active', s.id === 'screen-' + id));
+    const tb = $('#tabbar');
+    tb.hidden = (id === 'read');
+    $$('.tab', tb).forEach((t) => t.classList.toggle('on', t.dataset.tab === (tab || id)));
     window.scrollTo(0, 0);
     if (id === 'read' || id === 'psalm' || id === 'kaddish') requestWakeLock(); else releaseWakeLock();
   }
@@ -159,7 +162,7 @@
     $('#home-dedication').textContent = settings.homeDedication || '';
     for (const k of ['father', 'mother']) {
       $('#home-avatar-' + k).innerHTML = imgOrPlaceholder(k, 'i-person', '', k === 'father' ? 'אבא' : 'אמא');
-      $('#home-name-' + k).textContent = nameLine(settings[k]) || 'הוסיפו שם בהגדרות';
+      $('#home-name-' + k).textContent = nameLine(settings[k]) || 'הוסיפו שם';
     }
     showScreen('home');
   }
@@ -190,7 +193,7 @@
     map.innerHTML = html;
     map.onclick = (e) => { const b = e.target.closest('[data-step]'); if (b) go(`read/${key}/${b.dataset.step}`); };
     $('#parent-start').onclick = () => go('read/' + key + '/0');
-    showScreen('parent');
+    showScreen('parent', key);
   }
 
   /* ---------- קריאה מלאה ---------- */
@@ -333,7 +336,7 @@
     $('#psalm-next').disabled = n >= 150;
     $('#psalm-prev').onclick = () => go('psalm/' + (n - 1));
     $('#psalm-next').onclick = () => go('psalm/' + (n + 1));
-    showScreen('psalm');
+    showScreen('psalm', 'tehillim');
   }
 
   /* ---------- קדיש ---------- */

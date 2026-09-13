@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>מרגרט ועמרם בוטבול – ספר אזכרה</title>
   <meta name="description" content="ספר להקראה בעת אזכרה בבית העלמין: תהילים, מזמור קי&quot;ט לפי אותיות השם, וקדיש נוסח ספרדי">
-  <meta name="theme-color" content="#2b3a55">
+  <meta name="theme-color" content="#0f0d0b">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="אזכרה">
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="icons/icon-192.png">
@@ -51,6 +51,19 @@
     <path d="M26 6l8 8-8 8-8-8z"/><path d="M26 10l4 4-4 4-4-4z" fill="currentColor" stroke="none"/>
     <path d="M2 14h12M38 14h12"/><circle cx="16" cy="14" r="1.6" fill="currentColor" stroke="none"/><circle cx="36" cy="14" r="1.6" fill="currentColor" stroke="none"/>
   </symbol>
+  <symbol id="i-emblem" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="50" cy="50" r="47" stroke-width="1"/>
+    <circle cx="50" cy="50" r="41" stroke-width=".8" stroke-dasharray="1.5 3.2"/>
+    <circle cx="50" cy="50" r="36" stroke-width=".6"/>
+    <path d="M50 20l1.6 3.4L55 25l-3.4 1.6L50 30l-1.6-3.4L45 25l3.4-1.6z" fill="currentColor" stroke="none"/>
+    <path d="M50 36c-3.2 4-5 6.8-5 9.6a5 5 0 0 0 10 0c0-2.8-1.8-5.6-5-9.6z" stroke-width="1.4"/>
+    <path d="M50 50v4" stroke-width="1.4"/>
+    <rect x="44" y="54" width="12" height="22" rx="1.5" stroke-width="1.4"/>
+    <path d="M36 80h28" stroke-width="1.2"/>
+  </symbol>
+  <symbol id="i-list" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+    <path d="M5 7h14M5 12h14M5 17h14"/>
+  </symbol>
   <symbol id="i-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
     <path d="M15 6l-6 6 6 6"/>
   </symbol>
@@ -58,48 +71,33 @@
 
 <!-- ===== מסך ראשי ===== -->
 <section id="screen-home" class="screen">
+  <div class="topbar home-topbar"><div class="topbar-inner">
+    <span class="mini-emblem" aria-hidden="true"><svg><use href="#i-emblem"/></svg></span>
+    <h1>ספר אזכרה</h1>
+    <button class="icon-btn ring" data-go="settings" aria-label="הגדרות"><svg><use href="#i-gear"/></svg></button>
+  </div></div>
   <div class="container">
-    <div class="home-header">
-      <div class="app-name">ספר אזכרה</div>
-    </div>
-    <div class="cover" id="home-cover"></div>
-    <h1 class="home-title" id="home-title"></h1>
-    <p class="home-dedication" id="home-dedication"></p>
-    <div class="ornament" aria-hidden="true"><svg><use href="#i-orn"/></svg></div>
-
-    <div class="parents">
-      <button class="parent-card" data-go="parent/father" aria-label="עמוד אבא">
-        <div class="photo" id="home-avatar-father"></div>
-        <div class="veil">
-          <div class="role">אבא</div>
-          <div class="name" id="home-name-father"></div>
-        </div>
-      </button>
-      <button class="parent-card" data-go="parent/mother" aria-label="עמוד אמא">
-        <div class="photo" id="home-avatar-mother"></div>
-        <div class="veil">
-          <div class="role">אמא</div>
-          <div class="name" id="home-name-mother"></div>
-        </div>
-      </button>
-    </div>
-
-    <div class="menu">
-      <button class="menu-btn" data-go="tehillim">
-        <span class="ico"><svg><use href="#i-book"/></svg></span>
-        <span>תהילים<small>כל ק"נ הפרקים</small></span>
-        <svg class="chev"><use href="#i-chev"/></svg>
-      </button>
-      <button class="menu-btn" data-go="kaddish">
-        <span class="ico"><svg><use href="#i-star"/></svg></span>
-        <span>קדיש יתום<small>נוסח ספרדי</small></span>
-        <svg class="chev"><use href="#i-chev"/></svg>
-      </button>
-      <button class="menu-btn" data-go="settings">
-        <span class="ico"><svg><use href="#i-gear"/></svg></span>
-        <span>הגדרות<small>שמות, תמונות והקדשות</small></span>
-        <svg class="chev"><use href="#i-chev"/></svg>
-      </button>
+    <div class="panel">
+      <div class="panel-band">– ספר אזכרה –</div>
+      <div class="emblem" aria-hidden="true"><svg><use href="#i-emblem"/></svg></div>
+      <div class="eyebrow" id="home-dedication"></div>
+      <h2 class="home-title" id="home-title"></h2>
+      <div class="sub-gold">ת.נ.צ.ב.ה</div>
+      <div class="cover" id="home-cover"></div>
+      <div class="tiles">
+        <button class="tile" data-go="parent/father" aria-label="עמוד אבא">
+          <div class="tile-img" id="home-avatar-father"></div>
+          <div class="tile-label">אבא<small id="home-name-father"></small></div>
+        </button>
+        <button class="tile" data-go="parent/mother" aria-label="עמוד אמא">
+          <div class="tile-img" id="home-avatar-mother"></div>
+          <div class="tile-label">אמא<small id="home-name-mother"></small></div>
+        </button>
+        <button class="tile" data-go="tehillim" aria-label="תהילים">
+          <div class="tile-img tile-icon"><svg><use href="#i-book"/></svg></div>
+          <div class="tile-label">תהילים<small>ק"נ פרקים</small></div>
+        </button>
+      </div>
     </div>
     <div class="home-footer">תְּהֵא נִשְׁמָתָם צְרוּרָה בִּצְרוֹר הַחַיִּים</div>
   </div>
@@ -310,6 +308,14 @@
     <p class="storage-note">הנתונים והתמונות נשמרים במכשיר זה בלבד ואינם נשלחים לשום מקום.</p>
   </div>
 </section>
+
+<nav class="tabbar" id="tabbar" aria-label="ניווט ראשי">
+  <button class="tab" data-go="home" data-tab="home"><svg><use href="#i-home"/></svg><span>שער</span></button>
+  <button class="tab" data-go="parent/father" data-tab="father"><svg><use href="#i-person"/></svg><span>אבא</span></button>
+  <button class="tab" data-go="parent/mother" data-tab="mother"><svg><use href="#i-person"/></svg><span>אמא</span></button>
+  <button class="tab" data-go="tehillim" data-tab="tehillim"><svg><use href="#i-book"/></svg><span>תהילים</span></button>
+  <button class="tab" data-go="kaddish" data-tab="kaddish"><svg><use href="#i-star"/></svg><span>קדיש</span></button>
+</nav>
 
 <input type="file" id="file-input" accept="image/*" hidden>
 <div class="toast" id="toast"></div>
