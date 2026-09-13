@@ -15,7 +15,7 @@
   <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;500;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;500;700&family=David+Libre:wght@400;500&display=swap">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -47,6 +47,10 @@
   <symbol id="i-person" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
     <circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/>
   </symbol>
+  <symbol id="i-orn" viewBox="0 0 52 28" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round">
+    <path d="M26 6l8 8-8 8-8-8z"/><path d="M26 10l4 4-4 4-4-4z" fill="currentColor" stroke="none"/>
+    <path d="M2 14h12M38 14h12"/><circle cx="16" cy="14" r="1.6" fill="currentColor" stroke="none"/><circle cx="36" cy="14" r="1.6" fill="currentColor" stroke="none"/>
+  </symbol>
   <symbol id="i-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
     <path d="M15 6l-6 6 6 6"/>
   </symbol>
@@ -61,17 +65,22 @@
     <div class="cover" id="home-cover"></div>
     <h1 class="home-title" id="home-title"></h1>
     <p class="home-dedication" id="home-dedication"></p>
+    <div class="ornament" aria-hidden="true"><svg><use href="#i-orn"/></svg></div>
 
     <div class="parents">
-      <button class="parent-card" data-go="parent/father">
-        <div class="avatar" id="home-avatar-father"></div>
-        <div class="role">אבא</div>
-        <div class="name" id="home-name-father"></div>
+      <button class="parent-card" data-go="parent/father" aria-label="עמוד אבא">
+        <div class="photo" id="home-avatar-father"></div>
+        <div class="veil">
+          <div class="role">אבא</div>
+          <div class="name" id="home-name-father"></div>
+        </div>
       </button>
-      <button class="parent-card" data-go="parent/mother">
-        <div class="avatar" id="home-avatar-mother"></div>
-        <div class="role">אמא</div>
-        <div class="name" id="home-name-mother"></div>
+      <button class="parent-card" data-go="parent/mother" aria-label="עמוד אמא">
+        <div class="photo" id="home-avatar-mother"></div>
+        <div class="veil">
+          <div class="role">אמא</div>
+          <div class="name" id="home-name-mother"></div>
+        </div>
       </button>
     </div>
 
@@ -79,17 +88,17 @@
       <button class="menu-btn" data-go="tehillim">
         <span class="ico"><svg><use href="#i-book"/></svg></span>
         <span>תהילים<small>כל ק"נ הפרקים</small></span>
-        <svg class="chev" width="20" height="20"><use href="#i-chev"/></svg>
+        <svg class="chev"><use href="#i-chev"/></svg>
       </button>
       <button class="menu-btn" data-go="kaddish">
         <span class="ico"><svg><use href="#i-star"/></svg></span>
         <span>קדיש יתום<small>נוסח ספרדי</small></span>
-        <svg class="chev" width="20" height="20"><use href="#i-chev"/></svg>
+        <svg class="chev"><use href="#i-chev"/></svg>
       </button>
       <button class="menu-btn" data-go="settings">
         <span class="ico"><svg><use href="#i-gear"/></svg></span>
         <span>הגדרות<small>שמות, תמונות והקדשות</small></span>
-        <svg class="chev" width="20" height="20"><use href="#i-chev"/></svg>
+        <svg class="chev"><use href="#i-chev"/></svg>
       </button>
     </div>
     <div class="home-footer">תְּהֵא נִשְׁמָתָם צְרוּרָה בִּצְרוֹר הַחַיִּים</div>
@@ -99,9 +108,9 @@
 <!-- ===== עמוד הורה ===== -->
 <section id="screen-parent" class="screen">
   <div class="topbar"><div class="topbar-inner">
-    <button class="icon-btn" data-back><svg><use href="#i-back"/></svg></button>
+    <button class="icon-btn" data-back aria-label="חזרה"><svg><use href="#i-back"/></svg></button>
     <h1 id="parent-title"></h1>
-    <button class="icon-btn" data-go="settings"><svg><use href="#i-gear"/></svg></button>
+    <button class="icon-btn" data-go="settings" aria-label="הגדרות"><svg><use href="#i-gear"/></svg></button>
   </div></div>
   <div class="container">
     <div class="hero" id="parent-hero"></div>
@@ -109,6 +118,8 @@
     <h2 class="parent-name" id="parent-name"></h2>
     <div class="tnzbh">ת.נ.צ.ב.ה</div>
     <div class="dedication-box" id="parent-dedication"></div>
+    <div class="ornament" aria-hidden="true"><svg><use href="#i-orn"/></svg></div>
+    <div class="letters-title">אותיות הקריאה במזמור קי"ט</div>
     <div class="letters-row" id="parent-letters"></div>
     <button class="primary-btn" id="parent-start">התחל קריאה<small>אותיות השם במזמור קי"ט, ולאחר מכן קדיש</small></button>
     <button class="secondary-btn" data-go="settings">עריכת שם, תמונה והקדשה</button>
@@ -119,12 +130,12 @@
 <section id="screen-read" class="screen reading">
   <div class="topbar">
     <div class="topbar-inner">
-      <button class="icon-btn" data-back><svg><use href="#i-back"/></svg></button>
+      <button class="icon-btn" data-back aria-label="חזרה"><svg><use href="#i-back"/></svg></button>
       <h1 id="read-title"></h1>
       <div class="font-controls">
-        <button class="icon-btn" data-font="md">א</button>
-        <button class="icon-btn" data-font="lg" style="font-size:18px">א</button>
-        <button class="icon-btn" data-font="xl" style="font-size:22px">א</button>
+        <button class="icon-btn" data-font="md" aria-label="גופן רגיל">א</button>
+        <button class="icon-btn" data-font="lg" style="font-size:22px" aria-label="גופן גדול">א</button>
+        <button class="icon-btn" data-font="xl" style="font-size:27px" aria-label="גופן גדול מאוד">א</button>
       </div>
     </div>
     <div class="progress"><div id="read-progress"></div></div>
@@ -136,9 +147,9 @@
 <!-- ===== רשימת פרקי תהילים ===== -->
 <section id="screen-tehillim" class="screen">
   <div class="topbar"><div class="topbar-inner">
-    <button class="icon-btn" data-back><svg><use href="#i-back"/></svg></button>
+    <button class="icon-btn" data-back aria-label="חזרה"><svg><use href="#i-back"/></svg></button>
     <h1>תהילים</h1>
-    <button class="icon-btn" data-go="home"><svg><use href="#i-home"/></svg></button>
+    <button class="icon-btn" data-go="home" aria-label="דף ראשי"><svg><use href="#i-home"/></svg></button>
   </div></div>
   <div class="container">
     <div class="search-row">
@@ -153,12 +164,12 @@
 <section id="screen-psalm" class="screen reading">
   <div class="topbar">
     <div class="topbar-inner">
-      <button class="icon-btn" data-back><svg><use href="#i-back"/></svg></button>
+      <button class="icon-btn" data-back aria-label="חזרה"><svg><use href="#i-back"/></svg></button>
       <h1 id="psalm-title"></h1>
       <div class="font-controls">
-        <button class="icon-btn" data-font="md">א</button>
-        <button class="icon-btn" data-font="lg" style="font-size:18px">א</button>
-        <button class="icon-btn" data-font="xl" style="font-size:22px">א</button>
+        <button class="icon-btn" data-font="md" aria-label="גופן רגיל">א</button>
+        <button class="icon-btn" data-font="lg" style="font-size:22px" aria-label="גופן גדול">א</button>
+        <button class="icon-btn" data-font="xl" style="font-size:27px" aria-label="גופן גדול מאוד">א</button>
       </div>
     </div>
   </div>
@@ -175,12 +186,12 @@
 <section id="screen-kaddish" class="screen reading">
   <div class="topbar">
     <div class="topbar-inner">
-      <button class="icon-btn" data-back><svg><use href="#i-back"/></svg></button>
+      <button class="icon-btn" data-back aria-label="חזרה"><svg><use href="#i-back"/></svg></button>
       <h1>קדיש יתום</h1>
       <div class="font-controls">
-        <button class="icon-btn" data-font="md">א</button>
-        <button class="icon-btn" data-font="lg" style="font-size:18px">א</button>
-        <button class="icon-btn" data-font="xl" style="font-size:22px">א</button>
+        <button class="icon-btn" data-font="md" aria-label="גופן רגיל">א</button>
+        <button class="icon-btn" data-font="lg" style="font-size:22px" aria-label="גופן גדול">א</button>
+        <button class="icon-btn" data-font="xl" style="font-size:27px" aria-label="גופן גדול מאוד">א</button>
       </div>
     </div>
   </div>
@@ -190,9 +201,9 @@
 <!-- ===== הגדרות ===== -->
 <section id="screen-settings" class="screen">
   <div class="topbar"><div class="topbar-inner">
-    <button class="icon-btn" data-back><svg><use href="#i-back"/></svg></button>
+    <button class="icon-btn" data-back aria-label="חזרה"><svg><use href="#i-back"/></svg></button>
     <h1>הגדרות</h1>
-    <button class="icon-btn" data-go="home"><svg><use href="#i-home"/></svg></button>
+    <button class="icon-btn" data-go="home" aria-label="דף ראשי"><svg><use href="#i-home"/></svg></button>
   </div></div>
   <div class="container">
 

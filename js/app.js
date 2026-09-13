@@ -107,9 +107,14 @@
   function placeholder(icon, text) {
     return `<div class="placeholder"><svg><use href="#${icon}"/></svg><span>${esc(text || '')}</span></div>`;
   }
-  function imgOrPlaceholder(key, icon, text) {
+  function imgOrPlaceholder(key, icon, text, alt) {
     const src = getImage(key) || DEFAULT_IMAGES[key];
-    return src ? `<img src="${src}" alt="">` : placeholder(icon, text);
+    return src ? `<img src="${src}" alt="${esc(alt || '')}">` : placeholder(icon, text);
+  }
+  // תמונה בתוך מסגרת זהב, בגודלה המלא (ללא חיתוך)
+  function framed(key, icon, text, alt) {
+    const src = getImage(key) || DEFAULT_IMAGES[key];
+    return src ? `<div class="frame"><img src="${src}" alt="${esc(alt || '')}"></div>` : `<div class="frame">${placeholder(icon, text)}</div>`;
   }
 
   /* ---------- ניווט ---------- */
@@ -149,11 +154,11 @@
 
   /* ---------- מסך ראשי ---------- */
   function renderHome() {
-    $('#home-cover').innerHTML = imgOrPlaceholder('cover', 'i-candle', 'תמונת שער – ניתן להוסיף בהגדרות');
+    $('#home-cover').innerHTML = framed('cover', 'i-candle', 'תמונת שער – ניתן להוסיף בהגדרות', 'תמונת ההורים');
     $('#home-title').textContent = settings.familyTitle || '';
     $('#home-dedication').textContent = settings.homeDedication || '';
     for (const k of ['father', 'mother']) {
-      $('#home-avatar-' + k).innerHTML = imgOrPlaceholder(k, 'i-person');
+      $('#home-avatar-' + k).innerHTML = imgOrPlaceholder(k, 'i-person', '', k === 'father' ? 'אבא' : 'אמא');
       $('#home-name-' + k).textContent = nameLine(settings[k]) || 'הוסיפו שם בהגדרות';
     }
     showScreen('home');
@@ -164,7 +169,7 @@
     const p = settings[key];
     const role = key === 'father' ? 'אבא' : 'אמא';
     $('#parent-title').textContent = role;
-    $('#parent-hero').innerHTML = imgOrPlaceholder(key, 'i-person', 'ניתן להוסיף תמונה בהגדרות');
+    $('#parent-hero').innerHTML = framed(key, 'i-person', 'ניתן להוסיף תמונה בהגדרות', role);
     $('#parent-role').textContent = key === 'father' ? 'אבינו היקר' : 'אמנו היקרה';
     $('#parent-name').textContent = nameLine(p) || 'יש להזין שם בהגדרות';
     const ded = $('#parent-dedication');
@@ -443,6 +448,13 @@
   render(location.hash.slice(1) || 'home');
 
   if ('serviceWorker' in navigator && location.protocol !== 'file:') {
-    window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
+    window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').then((reg) => { reg.update().catch(() => {}); }).catch(() => {}));
+    // רענון אוטומטי פעם אחת כשגרסה חדשה של האפליקציה נכנסת לתוקף (לא בהתקנה הראשונה)
+    const hadController = !!navigator.serviceWorker.controller;
+    let reloaded = false;
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+      if (reloaded || !hadController) return;
+      reloaded = true; location.reload();
+    });
   }
 })();
