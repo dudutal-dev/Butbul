@@ -182,7 +182,7 @@
     const steps = buildSteps(p);
     const map = $('#parent-letters');
     let html = '', i = 0, groupHtml = '', curGroup = null;
-    const flush = () => { if (curGroup !== null) html += `<div class="letters-group"><div class="glabel">${esc(curGroup)}</div>${groupHtml}</div>`; groupHtml = ''; };
+    const flush = () => { if (curGroup !== null) html += `<div class="letters-group"><div class="glabel">${esc(curGroup)}</div><div class="row">${groupHtml}</div></div>`; groupHtml = ''; };
     steps.forEach((st, idx) => {
       if (st.group !== curGroup) { flush(); curGroup = st.group; }
       if (st.type === 'kaddish') groupHtml += `<button class="letter-chip kaddish" data-step="${idx}">קדיש</button>`;

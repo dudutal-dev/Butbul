@@ -139,6 +139,8 @@ svg { fill: none; }
 .letters-title { text-align: center; color: var(--muted); font-size: 14px; letter-spacing: .04em; margin-bottom: 12px; }
 .letters-map { display: flex; flex-direction: column; gap: 12px; margin: 0 0 22px; }
 .letters-group { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: center; }
+.letters-group .row { display: flex; gap: 8px; justify-content: center; width: 100%; }
+.letters-group .row .letter-chip { flex: 1 1 0; min-width: 0; max-width: 56px; padding: 0; }
 .letters-group .glabel { width: 100%; text-align: center; font-size: 13px; color: var(--gold); letter-spacing: .3em; }
 .letter-chip {
   min-width: 48px; height: 50px; padding: 0 8px; border-radius: 2px; background: var(--surface); border: 1px solid var(--gold-dim); color: var(--text);
