@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>ספר אזכרה – תהילים וקדיש</title>
+  <meta name="description" content="ספר להקראה בעת אזכרה בבית העלמין: תהילים, מזמור קי&quot;ט לפי אותיות השם, וקדיש נוסח ספרדי">
+  <meta name="theme-color" content="#2b3a55">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="אזכרה">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;500;700&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- סמלים -->
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="i-candle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 2c-1.5 2-2.5 3.5-2.5 5a2.5 2.5 0 0 0 5 0c0-1.5-1-3-2.5-5z"/>
+    <rect x="9" y="11" width="6" height="11" rx="1.2"/>
+    <path d="M12 9v2"/>
+  </symbol>
+  <symbol id="i-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v17H6.5A2.5 2.5 0 0 0 4 21.5z"/>
+    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+  </symbol>
+  <symbol id="i-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round">
+    <path d="M12 3l2.6 4.5H20l-2.7 4.5L20 16.5h-5.4L12 21l-2.6-4.5H4l2.7-4.5L4 7.5h5.4z"/>
+  </symbol>
+  <symbol id="i-gear" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="3"/>
+    <path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/>
+  </symbol>
+  <symbol id="i-back" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M9 6l6 6-6 6"/>
+  </symbol>
+  <symbol id="i-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M3 11l9-8 9 8"/><path d="M5 10v10h5v-6h4v6h5V10"/>
+  </symbol>
+  <symbol id="i-person" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+    <circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/>
+  </symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M15 6l-6 6 6 6"/>
+  </symbol>
+</svg>
+
+<!-- ===== מסך ראשי ===== -->
+<section id="screen-home" class="screen">
+  <div class="container">
+    <div class="home-header">
+      <div class="app-name">ספר אזכרה</div>
+    </div>
+    <div class="cover" id="home-cover"></div>
+    <h1 class="home-title" id="home-title"></h1>
+    <p class="home-dedication" id="home-dedication"></p>
+
+    <div class="parents">
+      <button class="parent-card" data-go="parent/father">
+        <div class="avatar" id="home-avatar-father"></div>
+        <div class="role">אבא</div>
+        <div class="name" id="home-name-father"></div>
+      </button>
+      <button class="parent-card" data-go="parent/mother">
+        <div class="avatar" id="home-avatar-mother"></div>
+        <div class="role">אמא</div>
+        <div class="name" id="home-name-mother"></div>
+      </button>
+    </div>
+
+    <div class="menu">
+      <button class="menu-btn" data-go="tehillim">
+        <span class="ico"><svg><use href="#i-book"/></svg></span>
+        <span>תהילים<small>כל ק"נ הפרקים</small></span>
+        <svg class="chev" width="20" height="20"><use href="#i-chev"/></svg>
+      </button>
+      <button class="menu-btn" data-go="kaddish">
+        <span class="ico"><svg><use href="#i-star"/></svg></span>
+        <span>קדיש יתום<small>נוסח ספרדי</small></span>
+        <svg class="chev" width="20" height="20"><use href="#i-chev"/></svg>
+      </button>
+      <button class="menu-btn" data-go="settings">
+        <span class="ico"><svg><use href="#i-gear"/></svg></span>
+        <span>הגדרות<small>שמות, תמונות והקדשות</small></span>
+        <svg class="chev" width="20" height="20"><use href="#i-chev"/></svg>
+      </button>
+    </div>
+    <div class="home-footer">תְּהֵא נִשְׁמָתָם צְרוּרָה בִּצְרוֹר הַחַיִּים</div>
+  </div>
+</section>
+
+<!-- ===== עמוד הורה ===== -->
+<section id="screen-parent" class="screen">
+  <div class="topbar"><div class="topbar-inner">
+    <button class="icon-btn" data-back><svg><use href="#i-back"/></svg></button>
+    <h1 id="parent-title"></h1>
+    <button class="icon-btn" data-go="settings"><svg><use href="#i-gear"/></svg></button>
+  </div></div>
+  <div class="container">
+    <div class="hero" id="parent-hero"></div>
+    <div class="parent-role" id="parent-role"></div>
+    <h2 class="parent-name" id="parent-name"></h2>
+    <div class="tnzbh">ת.נ.צ.ב.ה</div>
+    <div class="dedication-box" id="parent-dedication"></div>
+    <div class="letters-row" id="parent-letters"></div>
+    <button class="primary-btn" id="parent-start">התחל קריאה<small>אותיות השם במזמור קי"ט, ולאחר מכן קדיש</small></button>
+    <button class="secondary-btn" data-go="settings">עריכת שם, תמונה והקדשה</button>
+  </div>
+</section>
+
+<!-- ===== קריאה מלאה ===== -->
+<section id="screen-read" class="screen reading">
+  <div class="topbar">
+    <div class="topbar-inner">
+      <button class="icon-btn" data-back><svg><use href="#i-back"/></svg></button>
+      <h1 id="read-title"></h1>
+      <div class="font-controls">
+        <button class="icon-btn" data-font="md">א</button>
+        <button class="icon-btn" data-font="lg" style="font-size:18px">א</button>
+        <button class="icon-btn" data-font="xl" style="font-size:22px">א</button>
+      </div>
+    </div>
+    <div class="progress"><div id="read-progress"></div></div>
+  </div>
+  <div class="container" id="read-body"></div>
+  <button class="fab" id="read-next">המשך ↓</button>
+</section>
+
+<!-- ===== רשימת פרקי תהילים ===== -->
+<section id="screen-tehillim" class="screen">
+  <div class="topbar"><div class="topbar-inner">
+    <button class="icon-btn" data-back><svg><use href="#i-back"/></svg></button>
+    <h1>תהילים</h1>
+    <button class="icon-btn" data-go="home"><svg><use href="#i-home"/></svg></button>
+  </div></div>
+  <div class="container">
+    <div class="search-row">
+      <input type="number" id="chapter-input" inputmode="numeric" min="1" max="150" placeholder="מספר פרק (1–150)">
+      <button class="small-btn" id="chapter-go">פתח</button>
+    </div>
+    <div class="chapters-grid" id="chapters-grid"></div>
+  </div>
+</section>
+
+<!-- ===== פרק בודד ===== -->
+<section id="screen-psalm" class="screen reading">
+  <div class="topbar">
+    <div class="topbar-inner">
+      <button class="icon-btn" data-back><svg><use href="#i-back"/></svg></button>
+      <h1 id="psalm-title"></h1>
+      <div class="font-controls">
+        <button class="icon-btn" data-font="md">א</button>
+        <button class="icon-btn" data-font="lg" style="font-size:18px">א</button>
+        <button class="icon-btn" data-font="xl" style="font-size:22px">א</button>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="section"><div class="card"><ol class="verses" id="psalm-verses"></ol></div></div>
+    <div class="pager">
+      <button id="psalm-prev">‹ הפרק הקודם</button>
+      <button id="psalm-next">הפרק הבא ›</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== קדיש ===== -->
+<section id="screen-kaddish" class="screen reading">
+  <div class="topbar">
+    <div class="topbar-inner">
+      <button class="icon-btn" data-back><svg><use href="#i-back"/></svg></button>
+      <h1>קדיש יתום</h1>
+      <div class="font-controls">
+        <button class="icon-btn" data-font="md">א</button>
+        <button class="icon-btn" data-font="lg" style="font-size:18px">א</button>
+        <button class="icon-btn" data-font="xl" style="font-size:22px">א</button>
+      </div>
+    </div>
+  </div>
+  <div class="container" id="kaddish-body"></div>
+</section>
+
+<!-- ===== הגדרות ===== -->
+<section id="screen-settings" class="screen">
+  <div class="topbar"><div class="topbar-inner">
+    <button class="icon-btn" data-back><svg><use href="#i-back"/></svg></button>
+    <h1>הגדרות</h1>
+    <button class="icon-btn" data-go="home"><svg><use href="#i-home"/></svg></button>
+  </div></div>
+  <div class="container">
+
+    <div class="settings-group">
+      <h2>דף השער</h2>
+      <div class="field">
+        <label>תמונת שער (תמונת ההורים)</label>
+        <div class="img-field">
+          <div class="thumb" id="thumb-cover"></div>
+          <div class="btns">
+            <button class="small-btn" data-pick="cover">בחירת תמונה</button>
+            <button class="small-btn danger" data-clear="cover">הסרת תמונה</button>
+          </div>
+        </div>
+      </div>
+      <div class="field">
+        <label>כותרת</label>
+        <input type="text" id="s-familyTitle">
+      </div>
+      <div class="field">
+        <label>הקדשה בדף השער</label>
+        <textarea id="s-homeDedication"></textarea>
+      </div>
+    </div>
+
+    <div class="settings-group" data-parent="father">
+      <h2>אבא</h2>
+      <div class="field">
+        <label>תמונה</label>
+        <div class="img-field">
+          <div class="thumb" id="thumb-father"></div>
+          <div class="btns">
+            <button class="small-btn" data-pick="father">בחירת תמונה</button>
+            <button class="small-btn danger" data-clear="father">הסרת תמונה</button>
+          </div>
+        </div>
+      </div>
+      <div class="field row">
+        <div><label>שם פרטי</label><input type="text" id="s-father-name" placeholder="לדוגמה: עמרם"></div>
+        <div><label>בן / בת</label>
+          <select id="s-father-gender"><option value="בן">בן</option><option value="בת">בת</option></select>
+        </div>
+      </div>
+      <div class="field">
+        <label>שם האם של הנפטר</label>
+        <input type="text" id="s-father-mother" placeholder="לדוגמה: רחל">
+      </div>
+      <div class="preview-line" id="preview-father"></div>
+      <div class="field" style="margin-top:10px">
+        <label>הקדשה בעמוד אבא</label>
+        <textarea id="s-father-dedication"></textarea>
+      </div>
+    </div>
+
+    <div class="settings-group" data-parent="mother">
+      <h2>אמא</h2>
+      <div class="field">
+        <label>תמונה</label>
+        <div class="img-field">
+          <div class="thumb" id="thumb-mother"></div>
+          <div class="btns">
+            <button class="small-btn" data-pick="mother">בחירת תמונה</button>
+            <button class="small-btn danger" data-clear="mother">הסרת תמונה</button>
+          </div>
+        </div>
+      </div>
+      <div class="field row">
+        <div><label>שם פרטי</label><input type="text" id="s-mother-name"></div>
+        <div><label>בן / בת</label>
+          <select id="s-mother-gender"><option value="בת">בת</option><option value="בן">בן</option></select>
+        </div>
+      </div>
+      <div class="field">
+        <label>שם האם של הנפטרת</label>
+        <input type="text" id="s-mother-mother">
+      </div>
+      <div class="preview-line" id="preview-mother"></div>
+      <div class="field" style="margin-top:10px">
+        <label>הקדשה בעמוד אמא</label>
+        <textarea id="s-mother-dedication"></textarea>
+      </div>
+    </div>
+
+    <div class="settings-group">
+      <h2>סדר הקריאה</h2>
+      <div class="switch-row">
+        <label for="s-customChapters">לקרוא לפני האותיות את פרקי התהילים המקובלים על הקבר<br><small style="color:var(--muted)">פרקים ל"ג, ט"ז, י"ז, ע"ב, צ"א, ק"ד, ק"ל</small></label>
+        <input type="checkbox" id="s-customChapters">
+      </div>
+      <div class="switch-row">
+        <label for="s-keepAwake">להשאיר את המסך דולק בזמן הקריאה</label>
+        <input type="checkbox" id="s-keepAwake">
+      </div>
+    </div>
+
+    <button class="primary-btn" id="settings-save">שמירה</button>
+    <p class="storage-note">הנתונים והתמונות נשמרים במכשיר זה בלבד ואינם נשלחים לשום מקום.</p>
+  </div>
+</section>
+
+<input type="file" id="file-input" accept="image/*" hidden>
+<div class="toast" id="toast"></div>
+
+<script src="js/tehillim-data.js"></script>
+<script src="js/kaddish.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
