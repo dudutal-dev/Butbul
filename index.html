@@ -119,18 +119,18 @@
     <div class="tnzbh">ת.נ.צ.ב.ה</div>
     <div class="dedication-box" id="parent-dedication"></div>
     <div class="ornament" aria-hidden="true"><svg><use href="#i-orn"/></svg></div>
-    <div class="letters-title">אותיות הקריאה במזמור קי"ט</div>
-    <div class="letters-row" id="parent-letters"></div>
+    <div class="letters-title">אותיות הקריאה במזמור קי"ט · לחיצה על אות פותחת את עמודה</div>
+    <div class="letters-map" id="parent-letters"></div>
     <button class="primary-btn" id="parent-start">התחל קריאה<small>אותיות השם במזמור קי"ט, ולאחר מכן קדיש</small></button>
     <button class="secondary-btn" data-go="settings">עריכת שם, תמונה והקדשה</button>
   </div>
 </section>
 
-<!-- ===== קריאה מלאה ===== -->
+<!-- ===== קריאה – עמוד אחר עמוד ===== -->
 <section id="screen-read" class="screen reading">
   <div class="topbar">
     <div class="topbar-inner">
-      <button class="icon-btn" data-back aria-label="חזרה"><svg><use href="#i-back"/></svg></button>
+      <button class="icon-btn" data-read-exit aria-label="חזרה לעמוד ההורה"><svg><use href="#i-back"/></svg></button>
       <h1 id="read-title"></h1>
       <div class="font-controls">
         <button class="icon-btn" data-font="md" aria-label="גופן רגיל">א</button>
@@ -140,8 +140,15 @@
     </div>
     <div class="progress"><div id="read-progress"></div></div>
   </div>
-  <div class="container" id="read-body"></div>
-  <button class="fab" id="read-next">המשך ↓</button>
+  <div class="container read-container">
+    <div class="step-counter" id="read-counter"></div>
+    <div id="read-body"></div>
+  </div>
+  <nav class="readnav" aria-label="דפדוף">
+    <button class="nav-btn prev" id="read-prev"><svg><use href="#i-back"/></svg><span>הקודם</span></button>
+    <div class="nav-dots" id="read-dots" aria-hidden="true"></div>
+    <button class="nav-btn next" id="read-next"><span>הבא</span><svg><use href="#i-chev"/></svg></button>
+  </nav>
 </section>
 
 <!-- ===== רשימת פרקי תהילים ===== -->

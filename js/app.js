@@ -138,12 +138,12 @@
   }
 
   function render(route) {
-    const [name, arg] = route.split('/');
+    const [name, arg, arg2] = route.split('/');
     if (history[history.length - 1] !== route) history.push(route);
     if (history.length > 40) history.shift();
     switch (name) {
       case 'parent': renderParent(arg === 'mother' ? 'mother' : 'father'); break;
-      case 'read': renderRead(arg === 'mother' ? 'mother' : 'father'); break;
+      case 'read': renderRead(arg === 'mother' ? 'mother' : 'father', parseInt(arg2, 10) || 0); break;
       case 'tehillim': renderTehillim(); break;
       case 'psalm': renderPsalm(parseInt(arg, 10) || 1); break;
       case 'kaddish': renderKaddish(); break;
@@ -176,12 +176,20 @@
     ded.textContent = p.dedication || 'כאן ניתן לכתוב הקדשה אישית (בהגדרות)';
     ded.classList.toggle('empty', !p.dedication);
 
-    const groups = letterGroups(p);
-    $('#parent-letters').innerHTML = groups.map((g, i) =>
-      (i ? '<span class="letter-chip sep">·</span>' : '') +
-      g.letters.map((l) => `<span class="letter-chip">${l}</span>`).join('')
-    ).join('');
-    $('#parent-start').onclick = () => go('read/' + key);
+    const steps = buildSteps(p);
+    const map = $('#parent-letters');
+    let html = '', i = 0, groupHtml = '', curGroup = null;
+    const flush = () => { if (curGroup !== null) html += `<div class="letters-group"><div class="glabel">${esc(curGroup)}</div>${groupHtml}</div>`; groupHtml = ''; };
+    steps.forEach((st, idx) => {
+      if (st.group !== curGroup) { flush(); curGroup = st.group; }
+      if (st.type === 'kaddish') groupHtml += `<button class="letter-chip kaddish" data-step="${idx}">קדיש</button>`;
+      else groupHtml += `<button class="letter-chip" data-step="${idx}" aria-label="${esc(st.title)}">${esc(st.chip)}</button>`;
+      i++;
+    });
+    flush();
+    map.innerHTML = html;
+    map.onclick = (e) => { const b = e.target.closest('[data-step]'); if (b) go(`read/${key}/${b.dataset.step}`); };
+    $('#parent-start').onclick = () => go('read/' + key + '/0');
     showScreen('parent');
   }
 
@@ -204,88 +212,99 @@
     </div>`;
   }
 
-  function renderRead(key) {
-    const p = settings[key];
-    const role = key === 'father' ? 'אבא' : 'אמא';
-    $('#read-title').textContent = nameLine(p) || role;
-    const groups = letterGroups(p);
-    const sections = [];
-
+  // בניית עמודי הקריאה: (פרקים מקובלים) → אותיות השם → נשמה → קדיש
+  function buildSteps(p) {
+    const steps = [];
     if (settings.customChapters) {
-      window.CUSTOM_CHAPTERS.forEach((n) => {
-        sections.push({
-          title: `פרק ${hebNum(n)}`, short: `פרק ${hebNum(n)}`,
-          html: `<div class="section-head"><div class="kicker">תהילים</div><h2>פֶּרֶק ${hebNum(n)}</h2></div>
-                 <div class="card"><ol class="verses">${versesHtml(n - 1)}</ol></div>`
-        });
-      });
+      window.CUSTOM_CHAPTERS.forEach((n) => steps.push({
+        type: 'chapter', group: 'תהילים', chip: hebNum(n), title: `תהילים ${hebNum(n)}`,
+        html: `<div class="section-head"><div class="kicker">תהילים</div><h2>פֶּרֶק ${hebNum(n)}</h2></div>
+               <div class="card"><ol class="verses">${versesHtml(n - 1)}</ol></div>`
+      }));
     }
-
-    if (groups.length) {
-      const total = groups.reduce((s, g) => s + g.letters.length, 0);
-      let count = 0;
-      groups.forEach((g) => {
-        g.letters.forEach((l, li) => {
-          count++;
-          const idx = window.ALEF_BET.indexOf(l);
-          const first = li === 0;
-          sections.push({
-            title: `אות ${l}׳ – ${g.label}`, short: `אות ${l}׳`,
-            html: `${first ? `<div class="group-label"><span>${esc(g.label)}</span></div>` : ''}
-              <div class="card">
-                <div class="letter-head">
-                  <span class="big">${l}</span>
-                  <div class="meta">
-                    <div class="lname">${esc(window.LETTER_NAMES[l])}</div>
-                    <div class="lof">מזמור קי"ט · אות ${count} מתוך ${total}</div>
-                  </div>
+    const groups = letterGroups(p);
+    const total = groups.reduce((a, g) => a + g.letters.length, 0);
+    let count = 0;
+    groups.forEach((g) => {
+      g.letters.forEach((l) => {
+        count++;
+        const idx = window.ALEF_BET.indexOf(l);
+        steps.push({
+          type: 'letter', group: g.label, chip: l, title: `אות ${l}׳ – ${g.label}`,
+          html: `<div class="section-head"><div class="kicker">מזמור קי"ט</div><h2>${esc(g.label)}</h2></div>
+            <div class="card">
+              <div class="letter-head">
+                <span class="big">${l}</span>
+                <div class="meta">
+                  <div class="lname">${esc(window.LETTER_NAMES[l])}</div>
+                  <div class="lof">אות ${count} מתוך ${total}</div>
                 </div>
-                <ol class="verses">${versesHtml(118, idx * 8, idx * 8 + 8)}</ol>
-              </div>`
-          });
+              </div>
+              <ol class="verses">${versesHtml(118, idx * 8, idx * 8 + 8)}</ol>
+            </div>`
         });
       });
-    } else {
-      sections.push({
-        title: 'חסר שם', short: 'המשך',
-        html: `<div class="card" style="text-align:center;color:var(--muted)">לא הוזן שם. יש להזין שם פרטי ושם האם במסך ההגדרות.</div>`
-      });
-    }
-
-    sections.push({
-      title: 'קדיש יתום', short: 'קדיש',
-      html: `<div class="section-head"><div class="kicker">${esc(window.KADDISH.subtitle)}</div><h2>${esc(window.KADDISH.title)}</h2></div>${kaddishHtml()}`
     });
+    steps.push({
+      type: 'kaddish', group: 'סיום', chip: 'קדיש', title: 'קדיש יתום',
+      html: `<div class="section-head"><div class="kicker">${esc(window.KADDISH.subtitle)}</div><h2>${esc(window.KADDISH.title)}</h2></div>${kaddishHtml()}
+             <div class="end-note">תְּהֵא נִשְׁמָת${p.gender === 'בת' ? 'הּ' : 'וֹ'} צְרוּרָה בִּצְרוֹר הַחַיִּים<br>ת.נ.צ.ב.ה</div>`
+    });
+    return steps;
+  }
 
+  let readCtx = null;
+  function renderRead(key, idx) {
+    const p = settings[key];
+    const steps = buildSteps(p);
+    if (!lettersOf(p.name).length) {
+      steps.unshift({ type: 'empty', group: '', chip: '', title: 'חסר שם',
+        html: `<div class="card" style="text-align:center;color:var(--muted)">לא הוזן שם. יש להזין שם פרטי ושם האם במסך ההגדרות.</div>` });
+    }
+    idx = Math.max(0, Math.min(steps.length - 1, idx || 0));
+    readCtx = { key, idx, n: steps.length };
+    const st = steps[idx];
+
+    $('#read-title').textContent = st.title;
+    $('#read-counter').textContent = `${nameLine(p) || (key === 'father' ? 'אבא' : 'אמא')} · עמוד ${idx + 1} מתוך ${steps.length}`;
+    $('#read-progress').style.width = ((idx + 1) / steps.length * 100) + '%';
     const body = $('#read-body');
-    body.innerHTML = sections.map((s, i) => `<div class="section" id="sec-${i}" data-title="${esc(s.title)}" data-short="${esc(s.short || s.title)}">${s.html}</div>`).join('') +
-      `<div class="end-note">תְּהֵא נִשְׁמָת${p.gender === 'בת' ? 'הּ' : 'וֹ'} צְרוּרָה בִּצְרוֹר הַחַיִּים<br>ת.נ.צ.ב.ה</div>`;
+    body.innerHTML = st.html;
+    body.classList.remove('page-enter'); void body.offsetWidth; body.classList.add('page-enter');
 
-    setupReadNav(sections.length);
+    const prev = $('#read-prev'), next = $('#read-next');
+    prev.disabled = idx === 0;
+    const last = idx === steps.length - 1;
+    next.classList.toggle('finish', last);
+    next.querySelector('span').textContent = last ? 'סיום' : (steps[idx + 1].type === 'kaddish' ? 'לקדיש' : 'הבא');
+    prev.onclick = () => go(`read/${key}/${idx - 1}`);
+    next.onclick = () => last ? go('parent/' + key) : go(`read/${key}/${idx + 1}`);
+
+    const dots = $('#read-dots');
+    if (steps.length <= 24) dots.innerHTML = steps.map((_, i) => `<i class="${i < idx ? 'done' : ''}${i === idx ? 'cur' : ''}"></i>`).join('');
+    else dots.innerHTML = '';
+
     showScreen('read');
   }
 
-  function setupReadNav(n) {
-    const fab = $('#read-next');
-    const prog = $('#read-progress');
-    let current = 0;
-    const update = () => {
-      const secs = $$('#read-body .section');
-      const top = 80;
-      current = 0;
-      secs.forEach((s, i) => { if (s.getBoundingClientRect().top <= top + 10) current = i; });
-      prog.style.width = ((current + 1) / n * 100) + '%';
-      const last = current >= n - 1;
-      fab.classList.toggle('show', !last);
-      fab.textContent = last ? '' : (secs[current + 1] ? 'המשך – ' + secs[current + 1].dataset.short + ' ↓' : 'המשך ↓');
-    };
-    window.onscroll = () => { if ($('#screen-read').classList.contains('active')) update(); };
-    fab.onclick = () => {
-      const next = $('#sec-' + (current + 1));
-      if (next) next.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    };
-    setTimeout(update, 50);
-  }
+  // דפדוף במקלדת ובהחלקת אצבע
+  document.addEventListener('keydown', (e) => {
+    if (!readCtx || !$('#screen-read').classList.contains('active')) return;
+    if (e.key === 'ArrowLeft' || e.key === 'PageDown' || e.key === ' ') { e.preventDefault(); $('#read-next').click(); }
+    if (e.key === 'ArrowRight' || e.key === 'PageUp') { e.preventDefault(); $('#read-prev').click(); }
+  });
+  let touchX = null, touchY = null;
+  document.addEventListener('touchstart', (e) => {
+    const t = e.touches[0]; touchX = (t.clientX > 24 && t.clientX < window.innerWidth - 24) ? t.clientX : null; touchY = t.clientY;
+  }, { passive: true });
+  document.addEventListener('touchend', (e) => {
+    if (touchX == null || !readCtx || !$('#screen-read').classList.contains('active')) return;
+    const t = e.changedTouches[0], dx = t.clientX - touchX, dy = t.clientY - touchY;
+    touchX = null;
+    if (Math.abs(dx) < 70 || Math.abs(dy) > Math.abs(dx)) return;
+    // בעברית: החלקה שמאלה = קדימה
+    if (dx < 0) $('#read-next').click(); else if (!$('#read-prev').disabled) $('#read-prev').click();
+  }, { passive: true });
 
   /* ---------- תהילים ---------- */
   function renderTehillim() {
@@ -426,6 +445,7 @@
   document.addEventListener('click', (e) => {
     const goEl = e.target.closest('[data-go]');
     if (goEl) { go(goEl.dataset.go); return; }
+    if (e.target.closest('[data-read-exit]')) { go('parent/' + (readCtx ? readCtx.key : 'father')); return; }
     if (e.target.closest('[data-back]')) { back(); return; }
     const f = e.target.closest('[data-font]');
     if (f) { settings.fontSize = f.dataset.font; saveSettings(); applyFont(); return; }
