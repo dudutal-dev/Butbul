@@ -8,10 +8,10 @@
   const DEFAULT_IMAGES = { cover: 'images/cover.jpg', father: 'images/father.jpg', mother: 'images/mother.jpg' };
 
   const DEFAULTS = {
-    familyTitle: 'לְעִלּוּי נִשְׁמַת הוֹרֵינוּ הַיְּקָרִים',
-    homeDedication: '',
+    familyTitle: 'מרגרט ועמרם בוטבול',
+    homeDedication: 'לְעִלּוּי נִשְׁמַת הוֹרֵינוּ הַיְּקָרִים',
     father: { name: 'עמרם', gender: 'בן', mother: 'רחל', dedication: '' },
-    mother: { name: '', gender: 'בת', mother: '', dedication: '' },
+    mother: { name: 'מרגרט', gender: 'בת', mother: 'רחל', dedication: '' },
     customChapters: false,
     keepAwake: true,
     fontSize: 'md'
